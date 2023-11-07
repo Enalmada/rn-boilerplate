@@ -15,8 +15,8 @@ import { observer } from "mobx-react-lite"
 import React from "react"
 import { useColorScheme } from "react-native"
 import * as Screens from "app/screens"
-import Config from "../config"
-import { useStores } from "../models" // @demo remove-current-line
+import Config from "app/config"
+import { useStores } from "app/models" // @demo remove-current-line
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"

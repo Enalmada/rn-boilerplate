@@ -5,15 +5,15 @@ import {
   Button, // @demo remove-current-line
   Text,
 } from "app/components"
-import { isRTL } from "../i18n"
-import { useStores } from "../models" // @demo remove-current-line
-import { AppStackScreenProps } from "../navigators"
-import { colors, spacing } from "../theme"
-import { useHeader } from "../utils/useHeader" // @demo remove-current-line
-import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
+import { isRTL } from "app/i18n"
+import { useStores } from "app/models" // @demo remove-current-line
+import { AppStackScreenProps } from "app/navigators"
+import { colors, spacing } from "app/theme"
+import { useHeader } from "app/utils/useHeader" // @demo remove-current-line
+import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
 
-const welcomeLogo = require("../../assets/images/logo.png")
-const welcomeFace = require("../../assets/images/welcome-face.png")
+const welcomeLogo = require("assets/images/logo.png")
+const welcomeFace = require("assets/images/welcome-face.png")
 
 interface WelcomeScreenProps extends AppStackScreenProps<"Welcome"> {}
 

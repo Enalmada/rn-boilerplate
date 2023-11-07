@@ -1,11 +1,11 @@
 import React, { FC } from "react"
 import * as Application from "expo-application"
 import { Linking, Platform, TextStyle, View, ViewStyle } from "react-native"
-import { Button, ListItem, Screen, Text } from "../components"
-import { DemoTabScreenProps } from "../navigators/DemoNavigator"
-import { colors, spacing } from "../theme"
-import { isRTL } from "../i18n"
-import { useStores } from "../models"
+import { Button, ListItem, Screen, Text } from "app/components"
+import { DemoTabScreenProps } from "app/navigators/DemoNavigator"
+import { colors, spacing } from "app/theme"
+import { isRTL } from "app/i18n"
+import { useStores } from "app/models"
 
 function openLinkInBrowser(url: string) {
   Linking.canOpenURL(url).then((canOpen) => canOpen && Linking.openURL(url))

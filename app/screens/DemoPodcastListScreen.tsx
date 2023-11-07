@@ -30,20 +30,20 @@ import {
   Screen,
   Text,
   Toggle,
-} from "../components"
-import { isRTL, translate } from "../i18n"
-import { useStores } from "../models"
-import { Episode } from "../models/Episode"
-import { DemoTabScreenProps } from "../navigators/DemoNavigator"
-import { colors, spacing } from "../theme"
-import { delay } from "../utils/delay"
-import { openLinkInBrowser } from "../utils/openLinkInBrowser"
+} from "app/components"
+import { isRTL, translate } from "app/i18n"
+import { useStores } from "app/models"
+import { Episode } from "app/models/Episode"
+import { DemoTabScreenProps } from "app/navigators/DemoNavigator"
+import { colors, spacing } from "app/theme"
+import { delay } from "app/utils/delay"
+import { openLinkInBrowser } from "app/utils/openLinkInBrowser"
 
 const ICON_SIZE = 14
 
-const rnrImage1 = require("../../assets/images/demo/rnr-image-1.png")
-const rnrImage2 = require("../../assets/images/demo/rnr-image-2.png")
-const rnrImage3 = require("../../assets/images/demo/rnr-image-3.png")
+const rnrImage1 = require("assets/images/demo/rnr-image-1.png")
+const rnrImage2 = require("assets/images/demo/rnr-image-2.png")
+const rnrImage3 = require("assets/images/demo/rnr-image-3.png")
 const rnrImages = [rnrImage1, rnrImage2, rnrImage3]
 
 export const DemoPodcastListScreen: FC<DemoTabScreenProps<"DemoPodcastList">> = observer(

@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import React from "react"
-import { AutoImage, Button, Card, Icon } from "../../../components"
-import { colors, spacing } from "../../../theme"
-import { Demo } from "../DemoShowroomScreen"
+import { AutoImage, Button, Card, Icon } from "app/components"
+import { colors, spacing } from "app/theme"
+import { Demo } from "app/screens"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 

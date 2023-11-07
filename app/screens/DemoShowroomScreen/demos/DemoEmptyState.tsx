@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import React from "react"
-import { EmptyState } from "../../../components"
-import { colors } from "../../../theme"
+import { EmptyState } from "app/components"
+import { colors } from "app/theme"
 import { DemoDivider } from "../DemoDivider"
-import { Demo } from "../DemoShowroomScreen"
+import { Demo } from "app/screens"
 import { DemoUseCase } from "../DemoUseCase"
 
 export const DemoEmptyState: Demo = {
@@ -23,7 +23,7 @@ export const DemoEmptyState: Demo = {
       description="There are a few different ways to pass content."
     >
       <EmptyState
-        imageSource={require("../../../../assets/images/logo.png")}
+        imageSource={require("assets/images/logo.png")}
         heading="Customize Image"
         content="You can pass in any image source."
       />

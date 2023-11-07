@@ -1,11 +1,11 @@
 import React from "react"
 import { Image, ImageProps, ImageStyle, StyleProp, TextStyle, View, ViewStyle } from "react-native"
-import { translate } from "../i18n"
-import { spacing } from "../theme"
+import { translate } from "app/i18n"
+import { spacing } from "app/theme"
 import { Button, ButtonProps } from "./Button"
 import { Text, TextProps } from "./Text"
 
-const sadFace = require("../../assets/images/sad-face.png")
+const sadFace = require("assets/images/sad-face.png")
 
 interface EmptyStateProps {
   /**
