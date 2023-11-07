@@ -7,8 +7,8 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated"
 import { useDrawerProgress } from "react-native-drawer-layout"
-import { isRTL } from "../../i18n"
-import { colors, spacing } from "../../theme"
+import { isRTL } from "app/i18n"
+import { colors, spacing } from "app/theme"
 
 interface DrawerIconButtonProps extends PressableProps {
   open: boolean

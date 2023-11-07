@@ -5,12 +5,12 @@ import {
   PartialState,
   createNavigationContainerRef,
 } from "@react-navigation/native"
-import Config from "../config"
-import type { PersistNavigationConfig } from "../config/config.base"
-import { useIsMounted } from "../utils/useIsMounted"
+import Config from "app/config"
+import type { PersistNavigationConfig } from "app/config/config.base"
+import { useIsMounted } from "app/utils/useIsMounted"
 import type { AppStackParamList, NavigationProps } from "./AppNavigator"
 
-import * as storage from "../utils/storage"
+import * as storage from "app/utils/storage"
 
 type Storage = typeof storage
 

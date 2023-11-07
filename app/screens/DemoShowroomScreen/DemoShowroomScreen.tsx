@@ -3,15 +3,15 @@ import React, { FC, ReactElement, useEffect, useRef, useState } from "react"
 import { Image, ImageStyle, Platform, SectionList, TextStyle, View, ViewStyle } from "react-native"
 import { Drawer } from "react-native-drawer-layout"
 import { type ContentStyle } from "@shopify/flash-list"
-import { ListItem, ListView, ListViewRef, Screen, Text } from "../../components"
-import { isRTL } from "../../i18n"
-import { DemoTabParamList, DemoTabScreenProps } from "../../navigators/DemoNavigator"
-import { colors, spacing } from "../../theme"
-import { useSafeAreaInsetsStyle } from "../../utils/useSafeAreaInsetsStyle"
+import { ListItem, ListView, ListViewRef, Screen, Text } from "app/components"
+import { isRTL } from "app/i18n"
+import { DemoTabParamList, DemoTabScreenProps } from "app/navigators/DemoNavigator"
+import { colors, spacing } from "app/theme"
+import { useSafeAreaInsetsStyle } from "app/utils/useSafeAreaInsetsStyle"
 import * as Demos from "./demos"
 import { DrawerIconButton } from "./DrawerIconButton"
 
-const logo = require("../../../assets/images/logo.png")
+const logo = require("assets/images/logo.png")
 
 export interface Demo {
   name: string
