@@ -1,12 +1,23 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { beforeEach, afterEach, expect, test, vi } from "vitest"
 import { load, loadString, save, saveString, clear, remove } from "./storage"
 
 // fixtures
 const VALUE_OBJECT = { x: 1 }
 const VALUE_STRING = JSON.stringify(VALUE_OBJECT)
 
-beforeEach(() => (AsyncStorage.getItem as jest.Mock).mockReturnValue(Promise.resolve(VALUE_STRING)))
-afterEach(() => jest.clearAllMocks())
+// Set up the mocks for AsyncStorage methods
+beforeEach(() => {
+  vi.spyOn(AsyncStorage, "getItem").mockResolvedValue(VALUE_STRING)
+  vi.spyOn(AsyncStorage, "setItem").mockResolvedValue(undefined)
+  vi.spyOn(AsyncStorage, "removeItem").mockResolvedValue(undefined)
+  vi.spyOn(AsyncStorage, "clear").mockResolvedValue(undefined)
+})
+
+// Clear all mocks after each test
+afterEach(() => {
+  vi.restoreAllMocks()
+})
 
 test("load", async () => {
   const value = await load("something")
@@ -35,5 +46,5 @@ test("remove", async () => {
 
 test("clear", async () => {
   await clear()
-  expect(AsyncStorage.clear).toHaveBeenCalledWith()
+  expect(AsyncStorage.clear).toHaveBeenCalled()
 })
