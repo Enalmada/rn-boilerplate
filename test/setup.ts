@@ -1,42 +1,57 @@
-// we always make sure 'react-native' gets included first
-import * as ReactNative from "react-native"
+// vitest.setup.ts
+import { vi } from 'vitest';
 import mockFile from "./mockFile"
+import AsyncStorageMock from './vitest-async-storage-mock';
 
-// libraries to mock
-jest.doMock("react-native", () => {
-  // Extend ReactNative
-  return Object.setPrototypeOf(
-    {
-      Image: {
-        ...ReactNative.Image,
-        resolveAssetSource: jest.fn((_source) => mockFile), // eslint-disable-line @typescript-eslint/no-unused-vars
-        getSize: jest.fn(
-          (
-            uri: string, // eslint-disable-line @typescript-eslint/no-unused-vars
-            success: (width: number, height: number) => void,
-            failure?: (_error: any) => void, // eslint-disable-line @typescript-eslint/no-unused-vars
-          ) => success(100, 100),
-        ),
-      },
-    },
-    ReactNative,
-  )
-})
+// Mocks
+vi.mock('react-native', async () => {
+  const actual = await vi.importActual('react-native'); // Import the actual module
 
-jest.mock("@react-native-async-storage/async-storage", () =>
-  require("@react-native-async-storage/async-storage/jest/async-storage-mock"),
-)
+  // Create a custom mock for Image if needed
+  const mockImage = {
+    ...actual.Image,
+    resolveAssetSource: vi.fn((_source) => mockFile), // eslint-disable-line @typescript-eslint/no-unused-vars
+    getSize: vi.fn((uri, success) => success(100, 100)),
+  };
 
-jest.mock("i18n-js", () => ({
-  currentLocale: () => "en",
-  t: (key: string, params: Record<string, string>) => {
-    return `${key} ${JSON.stringify(params)}`
-  },
-}))
+  return {
+    ...actual, // Spread all actual exports
+    Image: mockImage, // Override the Image export with your mock
+    // Add other specific mocks or overrides here
+    // e.g., Platform: { ...actual.Platform, OS: 'test', Version: 'test' },
+  };
+});
 
-declare const tron // eslint-disable-line @typescript-eslint/no-unused-vars
 
-jest.useFakeTimers()
-declare global {
-  let __TEST__: boolean
-}
+vi.mock('@react-native-async-storage/async-storage', async () => {
+  return {
+    ...AsyncStorageMock,
+    default: AsyncStorageMock,
+  };
+});
+
+
+
+
+vi.mock('i18n-js', () => {
+  // Define the mock functions
+  const t = (key: string, params: Record<string, any>) => `${key} ${JSON.stringify(params)}`;
+  const currentLocale = () => "en";
+
+  // Create the mock module object
+  const mockModule = {
+    t,
+    currentLocale,
+  };
+
+  return {
+    ...mockModule,
+    default: mockModule, // Include the module object as the default export
+  };
+});
+
+// Use fake timers
+vi.useFakeTimers();
+
+// Set up any globals
+global.__TEST__ = true;
