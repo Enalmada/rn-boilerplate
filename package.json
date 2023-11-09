@@ -5,7 +5,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "compile": "tsc --noEmit -p . --pretty",
-    "format": "prettier --write \"src/**/*.{js,jsx,json,md,ts,tsx}\"",
+    "format": "prettier --loglevel warn --write \"src/**/*.{js,jsx,json,md,ts,tsx}\"",
     "lint:fix": "eslint src/ test --fix --ext .js,.ts,.tsx && npm run format && bun run tsc",
     "patch": "patch-package",
     "test:unit": "vitest",

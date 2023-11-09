@@ -113,4 +113,4 @@ const $welcomeHeading: TextStyle = {
   marginBottom: spacing.md,
 }
 
-export default WelcomeScreen;
+export default WelcomeScreen
