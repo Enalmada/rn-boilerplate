@@ -4,9 +4,13 @@ import { AuthProvider } from "@/context/AuthProvider"
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <Stack>
+      <Stack
+        options={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen
-          name="(tabs)"
+          name="(demo)"
           options={{
             headerShown: false,
           }}
@@ -15,6 +19,13 @@ export default function RootLayout() {
           name="welcome"
           options={{
             title: "Welcome",
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="(auth)/demoLogin"
+          options={{
+            title: "Login",
             headerShown: false
           }}
         />

@@ -143,4 +143,5 @@ const $tapButton: ViewStyle = {
   marginTop: spacing.xs,
 }
 
+export default LoginScreen;
 // @demo remove-file

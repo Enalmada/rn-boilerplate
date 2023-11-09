@@ -26,7 +26,7 @@ function useProtectedRoute(user: User | null) {
     const inAuthGroup = segments[0] === "(auth)"
 
     if (!user && !inAuthGroup) {
-      router.replace("/login")
+      router.replace("/demoLogin")
     } else if (user && inAuthGroup) {
       router.replace("/welcome")
     }
