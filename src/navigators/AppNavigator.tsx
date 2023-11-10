@@ -19,7 +19,7 @@ import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remov
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "@/theme"
 import { WelcomeScreen } from "@/app/welcome"
-import { LoginScreen } from "@/app/(auth)/demoLogin"
+import { LoginScreen } from "@/app/(auth)/login"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator

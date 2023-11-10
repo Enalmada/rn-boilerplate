@@ -149,4 +149,6 @@ const $hint: TextStyle = {
   paddingBottom: spacing.lg,
 }
 
+export default DemoDebugScreen;
+
 // @demo remove-file

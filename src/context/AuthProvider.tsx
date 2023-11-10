@@ -1,47 +1,39 @@
-import { createContext, useContext, useEffect, useState } from "react"
-import { useSegments, useRouter } from "expo-router"
+// AuthProvider.tsx
+import React, { createContext, useContext, useEffect } from 'react';
+import { useRouter } from 'expo-router';
+import { useStores } from '@/models';
+import { autorun } from 'mobx'; // Import autorun from mobx
 
-type User = {
-  name: string
-}
+const AuthContext = createContext({
+  isAuthenticated: false,
+});
 
-type AuthType = {
-  user: User | null
-  setUser: (user: User | null) => void
-}
-
-const AuthContext = createContext<AuthType>({
-  user: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setUser: () => {}, // No-op function as a placeholder
-})
-
-export const useAuth = () => useContext(AuthContext)
-
-function useProtectedRoute(user: User | null) {
-  const segments = useSegments()
-  const router = useRouter()
-
-  useEffect(() => {
-    const inAuthGroup = segments[0] === "(auth)"
-
-    if (!user && !inAuthGroup) {
-      router.replace("/demoLogin")
-    } else if (user && inAuthGroup) {
-      router.replace("/welcome")
-    }
-  }, [user, segments, router])
-}
+export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }: { children: React.ReactNode }): JSX.Element {
-  const [user, setUser] = useState<User | null>(null)
+  const { authenticationStore } = useStores();
+  const router = useRouter();
 
-  useProtectedRoute(user)
+  useEffect(() => {
+    // Use autorun to react to changes in the authentication state
+    const disposer = autorun(() => {
+      // This will run every time the isAuthenticated property changes
+      if (authenticationStore.isAuthenticated) {
+        router.replace('/welcome');
+      } else {
+        router.replace('/login');
+      }
+    });
 
-  const authContext: AuthType = {
-    user,
-    setUser,
-  }
+    // Return a cleanup function that MobX will call when
+    // this observed function is no longer needed
+    return disposer;
+  }, [authenticationStore, router]);
 
-  return <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>
+  // There's no need to pass isAuthenticated down through context
+  // if it's already available in the authenticationStore, but you can
+  // if you need to pass down actions or other non-observable data.
+  return <AuthContext.Provider value={{ isAuthenticated: authenticationStore.isAuthenticated }}>
+    {children}
+  </AuthContext.Provider>;
 }

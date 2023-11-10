@@ -33,10 +33,18 @@ export default function DemoLayout() {
       }
     >
       <Tabs.Screen
+        name="demoShowroom"
+        options={{
+          tabBarLabel: translate("demoNavigator.componentsTab"),
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="components" color={focused ? colors.tint : undefined} size={30} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="demoCommunity"
         options={{
-          href: "/demoCommunity",
-          title: "",
+          headerShown: false,
           tabBarLabel: translate("demoNavigator.communityTab"),
           tabBarIcon: ({ focused }) => (
             <Icon icon="community" color={focused ? colors.tint : undefined} size={30} />
@@ -47,7 +55,7 @@ export default function DemoLayout() {
         name="demoPodcastList"
         options={{
           title: "",
-          headerShown: true,
+          headerShown: false,
           href: {
             pathname: "/demoPodcastList",
           },
@@ -62,7 +70,7 @@ export default function DemoLayout() {
         name="demoDebug"
         options={{
           title: "",
-          headerShown: true,
+          headerShown: false,
           href: {
             pathname: "/demoDebug",
           },

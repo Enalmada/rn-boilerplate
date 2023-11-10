@@ -14,8 +14,10 @@ clone this repository
 
 ## TODO
 - [ ] react navigation to [expo router](https://docs.expo.dev/router/migrate/from-react-navigation/).  [One reason why](https://www.reddit.com/r/reactnative/comments/14apzyj/comment/jocmfmy/?utm_source=share&utm_medium=web2x&context=3) 
+  - [ ] navigation persistence
 - [ ] [tamagui components](https://tamagui.dev/)
 - [ ] rest to graphql
+
 
 ## Notes
 For next.js backend, webapp, and admin, consider this template: https://github.com/Enalmada/nextjs-boilerplate
