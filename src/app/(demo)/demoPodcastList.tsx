@@ -6,7 +6,7 @@ import {
   Image,
   ImageSourcePropType,
   ImageStyle,
-  Platform,
+  Platform, Pressable,
   StyleSheet,
   TextStyle,
   View,
@@ -272,33 +272,88 @@ const EpisodeCard = observer(function EpisodeCard({
       content={`${episode.parsedTitleAndSubtitle.title} - ${episode.parsedTitleAndSubtitle.subtitle}`}
       {...accessibilityHintProps}
       RightComponent={<Image source={imageUri} style={$itemThumbnail} />}
-      FooterComponent={
-        <Button
-          onPress={handlePressFavorite}
-          onLongPress={handlePressFavorite}
-          style={[$favoriteButton, isFavorite && $unFavoriteButton]}
-          accessibilityLabel={
-            isFavorite
-              ? translate("demoPodcastListScreen.accessibility.unfavoriteIcon")
-              : translate("demoPodcastListScreen.accessibility.favoriteIcon")
-          }
-          LeftAccessory={ButtonLeftAccessory}
-        >
-          <Text
-            size="xxs"
-            accessibilityLabel={episode.duration.accessibilityLabel}
-            weight="medium"
-            text={
-              isFavorite
-                ? translate("demoPodcastListScreen.unfavoriteButton")
-                : translate("demoPodcastListScreen.favoriteButton")
-            }
-          />
-        </Button>
-      }
+      FooterComponent={<FooterComponent
+        handlePressFavorite={handlePressFavorite}
+        isFavorite={isFavorite}
+        translate={translate}
+        episode={episode}
+        ButtonLeftAccessory={ButtonLeftAccessory}
+      />}
     />
   )
 })
+// Define your styles outside the component
+const styles = StyleSheet.create({
+  pressable: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // Add other common styles here
+  },
+  pressed: {
+    // Define your pressed state styles here if you have any
+  },
+  iconContainer: {
+    marginRight: spacing.sm,
+    // Add other styles for your icon container
+  },
+});
+
+// Then use the styles in your component
+const PressableView = ({ onPress, onLongPress, style, children, accessibilityLabel, LeftAccessory }) => {
+  return (
+    <Pressable
+      onPress={onPress}
+      onLongPress={onLongPress}
+      style={({ pressed }) => [
+        styles.pressable,
+        style,
+        pressed && styles.pressed,
+      ]}
+      accessibilityLabel={accessibilityLabel}
+    >
+      {({ pressed }) => (
+        <>
+          {LeftAccessory ? <LeftAccessory pressableState={pressed} style={styles.iconContainer} /> : null}
+          {children}
+        </>
+      )}
+    </Pressable>
+  );
+};
+
+
+// Usage in your FooterComponent
+const FooterComponent = ({
+                           handlePressFavorite,
+                           isFavorite,
+                           translate,
+                           episode,
+                           ButtonLeftAccessory,
+                         }) => {
+  // Your existing favorite button styles
+  const favoriteButtonStyles = isFavorite ? $unFavoriteButton : $favoriteButton;
+
+  return (
+    <PressableView
+      onPress={handlePressFavorite}
+      onLongPress={handlePressFavorite}
+      style={favoriteButtonStyles}
+      accessibilityLabel={
+        isFavorite
+          ? translate("demoPodcastListScreen.accessibility.unfavoriteIcon")
+          : translate("demoPodcastListScreen.accessibility.favoriteIcon")
+      }
+      LeftAccessory={ButtonLeftAccessory}
+    >
+      <Text
+        // ... other props
+        text={isFavorite ? translate("demoPodcastListScreen.unfavoriteButton") : translate("demoPodcastListScreen.favoriteButton")}
+      />
+    </PressableView>
+  );
+};
+
+
 
 // #region Styles
 const $screenContentContainer: ViewStyle = {
@@ -362,15 +417,23 @@ const $favoriteButton: ViewStyle = {
   borderColor: colors.palette.neutral300,
   paddingHorizontal: spacing.md,
   paddingTop: spacing.xxxs,
-  paddingBottom: 0,
+  paddingBottom: spacing.xxxs,
   minHeight: 32,
   alignSelf: "flex-start",
-}
+};
 
 const $unFavoriteButton: ViewStyle = {
-  borderColor: colors.palette.primary100,
+  borderRadius: 17,
+  marginTop: spacing.md,
+  justifyContent: "flex-start",
   backgroundColor: colors.palette.primary100,
-}
+  borderColor: colors.palette.primary100,
+  paddingHorizontal: spacing.md,
+  paddingTop: spacing.xxxs,
+  paddingBottom: spacing.xxxs,
+  minHeight: 32,
+  alignSelf: "flex-start",
+};
 
 const $emptyState: ViewStyle = {
   marginTop: spacing.xxl,
