@@ -28,7 +28,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   } = useStores()
 
   function goNext() {
-    router.replace("/demoShowroom")
+    router.replace("/showroom")
   }
 
   useHeader(

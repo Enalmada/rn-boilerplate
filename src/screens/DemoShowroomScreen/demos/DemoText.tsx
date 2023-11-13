@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { Text } from "@/components"
 import { colors } from "@/theme"
-import { Demo } from "@/app/(demo)/demoShowroom"
+import { Demo } from "@/app/(demo)/showroom"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 

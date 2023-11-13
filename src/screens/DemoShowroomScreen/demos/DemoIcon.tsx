@@ -2,7 +2,7 @@
 import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { Icon, iconRegistry, IconTypes, Text } from "@/components"
 import { colors, spacing } from "@/theme"
-import { Demo } from "@/app/(demo)/demoShowroom"
+import { Demo } from "@/app/(demo)/showroom"
 import { DemoUseCase } from "../DemoUseCase"
 
 const $demoIconContainer: ViewStyle = {

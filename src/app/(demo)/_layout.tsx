@@ -33,7 +33,7 @@ export default function DemoLayout() {
       }
     >
       <Tabs.Screen
-        name="demoShowroom"
+        name="showroom/index"
         options={{
           tabBarLabel: translate("demoNavigator.componentsTab"),
           tabBarIcon: ({ focused }) => (

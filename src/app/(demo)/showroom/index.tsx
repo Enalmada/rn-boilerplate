@@ -80,13 +80,12 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const menuRef = useRef<ListViewRef<DemoListItem["item"]>>(null)
     const route = useRoute<RouteProp<DemoTabParamList, "DemoShowroom">>()
     const params = route.params
-
-    // handle Web links
+    
     /*
     useEffect(() => {
-      if (Object.keys(params).length > 0) {
+      if (params && Object.keys(params).length > 0) {
         const demoValues = Object.values(Demos)
-        const findSectionIndex = demoValues.findIndex(
+        const findSectionIndex = demoValues?.findIndex(
           (x) => x.name.toLowerCase() === params.queryIndex,
         )
         let findItemIndex = 0
@@ -103,7 +102,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
         handleScroll(findSectionIndex, findItemIndex)
       }
     }, [params])
-    
+
      */
 
     const toggleDrawer = () => {

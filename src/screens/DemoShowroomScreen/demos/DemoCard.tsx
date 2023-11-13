@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import { AutoImage, Button, Card, Icon } from "@/components"
 import { colors, spacing } from "@/theme"
-import { Demo } from "@/app/(demo)/demoShowroom"
+import { Demo } from "@/app/(demo)/showroom"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 

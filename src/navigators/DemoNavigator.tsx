@@ -7,7 +7,7 @@ import { translate } from "@/i18n"
 import { DemoPodcastListScreen } from "@/app/(demo)/demoPodcastList"
 import { colors, spacing, typography } from "@/theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
-import { DemoShowroomScreen } from "@/app/(demo)/demoShowroom"
+import { DemoShowroomScreen } from "@/app/(demo)/showroom"
 import { DemoCommunityScreen } from "@/app/(demo)/demoCommunity"
 import { DemoDebugScreen } from "@/app/(demo)/demoDebug"
 
