@@ -1,34 +1,34 @@
 {
   "name": "rn-boilerplate",
   "version": "0.0.1",
-  "private": true,
-  "main": "expo-router/entry",
   "scripts": {
-    "compile": "tsc --noEmit -p . --pretty",
-    "format": "prettier --loglevel warn --write \"src/**/*.{js,jsx,json,md,ts,tsx}\"",
-    "lint:fix": "eslint src/ test --fix --ext .js,.ts,.tsx && npm run format && bun run tsc",
-    "patch": "patch-package",
-    "test:unit": "vitest",
-    "test:unit:watch": "vitest --watch",
-    "test:maestro": "maestro test .maestro/FavoritePodcast.yaml",
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
-    "postinstall": "patch-package",
-    "bundle:visualize": "npx react-native-bundle-visualizer",
-    "bundle:visualize:dev": "npx react-native-bundle-visualizer --dev",
-    "build:ios:sim": "eas build --profile development --platform ios --local",
-    "build:ios:dev": "eas build --profile development:device --platform ios --local",
-    "build:ios:prod": "eas build --profile production --platform ios --local",
-    "build:android:sim": "eas build --profile development --platform android --local",
+    "android": "npx expo run:android",
     "build:android:dev": "eas build --profile development:device --platform android --local",
     "build:android:prod": "eas build --profile production --platform android --local",
-    "start": "npx expo start",
-    "android": "npx expo run:android",
-    "ios": "npx expo run:ios",
-    "web": "npx expo start --web --port 8081",
+    "build:android:sim": "eas build --profile development --platform android --local",
+    "build:ios:dev": "eas build --profile development:device --platform ios --local",
+    "build:ios:prod": "eas build --profile production --platform ios --local",
+    "build:ios:sim": "eas build --profile development --platform ios --local",
+    "bundle:visualize": "npx react-native-bundle-visualizer",
+    "bundle:visualize:dev": "npx react-native-bundle-visualizer --dev",
     "bundle:web": "npx expo export --platform web",
-    "serve:web": "npx server dist",
+    "compile": "tsc --noEmit -p . --pretty",
+    "format": "prettier --loglevel warn --write \"src/**/*.{js,jsx,json,md,ts,tsx}\"",
+    "ios": "npx expo run:ios",
+    "lint:fix": "eslint src/ test --fix --ext .js,.ts,.tsx && npm run format && bun run tsc",
+    "patch": "patch-package",
+    "postinstall": "patch-package",
+    "prebuild": "npx expo prebuild",
     "prebuild:clean": "npx expo prebuild --clean",
-    "prebuild": "npx expo prebuild"
+    "precommit": "bun lint-staged",
+    "prepare": "husky install",
+    "serve:web": "npx server dist",
+    "start": "npx expo start",
+    "test:maestro": "maestro test .maestro/FavoritePodcast.yaml",
+    "test:unit": "vitest",
+    "test:unit:watch": "vitest --watch",
+    "web": "npx expo start --web --port 8081"
   },
   "dependencies": {
     "@expo-google-fonts/space-grotesk": "^0.2.2",
@@ -90,6 +90,8 @@
     "eslint-plugin-react": "7.30.0",
     "eslint-plugin-react-native": "4.0.0",
     "happy-dom": "^12.10.3",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.1.0",
     "patch-package": "6.4.7",
     "postinstall-prepare": "1.0.1",
     "prettier": "2.8.8",
@@ -103,23 +105,9 @@
     "typescript": "^5.2.2",
     "vitest": "^0.34.6"
   },
-  "expo": {
-    "name": "rn-boilerplate",
-    "scheme": "rn-boilerplate",
-    "install": {
-      "exclude": [
-        "typescript"
-      ]
-    }
-  },
+  "private": true,
   "engines": {
     "node": ">=18"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "semi": false,
-    "singleQuote": false,
-    "trailingComma": "all"
   },
   "eslintConfig": {
     "root": true,
@@ -192,5 +180,21 @@
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off"
     }
+  },
+  "expo": {
+    "name": "rn-boilerplate",
+    "scheme": "rn-boilerplate",
+    "install": {
+      "exclude": [
+        "typescript"
+      ]
+    }
+  },
+  "main": "expo-router/entry",
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": false,
+    "trailingComma": "all"
   }
 }
