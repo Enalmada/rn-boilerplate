@@ -1,6 +1,4 @@
 {
-  "name": "rn-boilerplate",
-  "displayName": "rn-boilerplate",
   "expo": {
     "name": "rn-boilerplate",
     "slug": "rn-boilerplate",
@@ -54,6 +52,7 @@
       "bundler": "metro"
     },
     "plugins": [
+      "expo-router",
       "expo-localization",
       [
         "expo-build-properties",

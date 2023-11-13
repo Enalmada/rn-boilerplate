@@ -46,7 +46,7 @@ export default defineConfig({
     extensions: extensions,
     alias: {
       "react-native": "react-native-web",
-      'app': path.resolve(__dirname, './app'),
+      '@': path.resolve(__dirname, './src'),
       'assets': path.resolve(__dirname, './assets'),
     },
   },
