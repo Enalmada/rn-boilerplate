@@ -80,8 +80,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const menuRef = useRef<ListViewRef<DemoListItem["item"]>>(null)
     const route = useRoute<RouteProp<DemoTabParamList, "DemoShowroom">>()
     const params = route.params
-    
-    /*
+
     useEffect(() => {
       if (params && Object.keys(params).length > 0) {
         const demoValues = Object.values(Demos)
@@ -102,8 +101,6 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
         handleScroll(findSectionIndex, findItemIndex)
       }
     }, [params])
-
-     */
 
     const toggleDrawer = () => {
       if (!open) {

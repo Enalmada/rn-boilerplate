@@ -2,7 +2,7 @@
 import { ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { Button, Icon, Text } from "@/components"
 import { colors, typography } from "@/theme"
-import { Demo } from "@/app/(demo)/demoShowroom"
+import { Demo } from "@/app/(demo)/showroom"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
 
