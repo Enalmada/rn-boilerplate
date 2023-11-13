@@ -81,8 +81,8 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
     const route = useRoute<RouteProp<DemoTabParamList, "DemoShowroom">>()
     const params = route.params
 
-    /*
     // handle Web links
+    /*
     useEffect(() => {
       if (Object.keys(params).length > 0) {
         const demoValues = Object.values(Demos)
@@ -103,7 +103,7 @@ export const DemoShowroomScreen: FC<DemoTabScreenProps<"DemoShowroom">> =
         handleScroll(findSectionIndex, findItemIndex)
       }
     }, [params])
-
+    
      */
 
     const toggleDrawer = () => {
@@ -258,5 +258,5 @@ const $demoUseCasesSpacer: ViewStyle = {
   paddingBottom: spacing.xxl,
 }
 
-export default DemoShowroomScreen;
+export default DemoShowroomScreen
 // @demo remove-file

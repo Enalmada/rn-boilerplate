@@ -133,5 +133,5 @@ const $logo: ImageStyle = {
   width: 38,
 }
 
-export default DemoCommunityScreen;
+export default DemoCommunityScreen
 // @demo remove-file

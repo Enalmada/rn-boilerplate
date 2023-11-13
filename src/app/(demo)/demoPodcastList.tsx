@@ -1,12 +1,16 @@
 import { observer } from "mobx-react-lite"
 import { ComponentType, FC, useEffect, useMemo, useState } from "react"
+
 import {
+  StyleProp,
+  PressableProps,
   AccessibilityProps,
   ActivityIndicator,
   Image,
   ImageSourcePropType,
   ImageStyle,
-  Platform, Pressable,
+  Platform,
+  Pressable,
   StyleSheet,
   TextStyle,
   View,
@@ -20,18 +24,8 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated"
-import {
-  Button,
-  ButtonAccessoryProps,
-  Card,
-  EmptyState,
-  Icon,
-  ListView,
-  Screen,
-  Text,
-  Toggle,
-} from "@/components"
-import { isRTL, translate } from "@/i18n"
+import { Card, EmptyState, Icon, ListView, Screen, Text, Toggle } from "@/components"
+import { isRTL, translate, TxKeyPath } from "@/i18n"
 import { useStores } from "@/models"
 import { Episode } from "@/models/Episode"
 import { DemoTabScreenProps } from "@/navigators/DemoNavigator"
@@ -218,7 +212,10 @@ const EpisodeCard = observer(function EpisodeCard({
     openLinkInBrowser(episode.enclosure.link)
   }
 
-  const ButtonLeftAccessory: ComponentType<ButtonAccessoryProps> = useMemo(
+  const ButtonLeftAccessory: ComponentType<{
+    pressableState: boolean
+    style?: StyleProp<ViewStyle>
+  }> = useMemo(
     () =>
       function ButtonLeftAccessory() {
         return (
@@ -272,66 +269,81 @@ const EpisodeCard = observer(function EpisodeCard({
       content={`${episode.parsedTitleAndSubtitle.title} - ${episode.parsedTitleAndSubtitle.subtitle}`}
       {...accessibilityHintProps}
       RightComponent={<Image source={imageUri} style={$itemThumbnail} />}
-      FooterComponent={<FooterComponent
-        handlePressFavorite={handlePressFavorite}
-        isFavorite={isFavorite}
-        translate={translate}
-        episode={episode}
-        ButtonLeftAccessory={ButtonLeftAccessory}
-      />}
+      FooterComponent={
+        <FooterComponent
+          handlePressFavorite={handlePressFavorite}
+          isFavorite={isFavorite}
+          translate={translate}
+          ButtonLeftAccessory={ButtonLeftAccessory}
+        />
+      }
     />
   )
 })
 // Define your styles outside the component
 const styles = StyleSheet.create({
+  iconContainer: {
+    marginRight: spacing.sm,
+    // Add other styles for your icon container
+  },
   pressable: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: "center",
+    flexDirection: "row",
     // Add other common styles here
   },
   pressed: {
     // Define your pressed state styles here if you have any
   },
-  iconContainer: {
-    marginRight: spacing.sm,
-    // Add other styles for your icon container
-  },
-});
+})
 
-// Then use the styles in your component
-const PressableView = ({ onPress, onLongPress, style, children, accessibilityLabel, LeftAccessory }) => {
+interface PressableViewProps extends PressableProps {
+  style?: StyleProp<ViewStyle>
+  children?: React.ReactNode
+  LeftAccessory?: ComponentType<{ pressableState: boolean; style?: StyleProp<ViewStyle> }>
+}
+
+const PressableView: React.FC<PressableViewProps> = ({
+  onPress,
+  onLongPress,
+  style,
+  children,
+  accessibilityLabel,
+  LeftAccessory,
+}) => {
   return (
     <Pressable
       onPress={onPress}
       onLongPress={onLongPress}
-      style={({ pressed }) => [
-        styles.pressable,
-        style,
-        pressed && styles.pressed,
-      ]}
+      style={({ pressed }) => [styles.pressable, style, pressed && styles.pressed]}
       accessibilityLabel={accessibilityLabel}
     >
       {({ pressed }) => (
         <>
-          {LeftAccessory ? <LeftAccessory pressableState={pressed} style={styles.iconContainer} /> : null}
+          {LeftAccessory ? (
+            <LeftAccessory pressableState={pressed} style={styles.iconContainer} />
+          ) : null}
           {children}
         </>
       )}
     </Pressable>
-  );
-};
+  )
+}
 
+interface FooterComponentProps {
+  handlePressFavorite: () => void
+  isFavorite: boolean
+  translate: (key: TxKeyPath) => string
+  ButtonLeftAccessory: ComponentType<{ pressableState: boolean; style?: StyleProp<ViewStyle> }>
+}
 
-// Usage in your FooterComponent
-const FooterComponent = ({
-                           handlePressFavorite,
-                           isFavorite,
-                           translate,
-                           episode,
-                           ButtonLeftAccessory,
-                         }) => {
+const FooterComponent: React.FC<FooterComponentProps> = ({
+  handlePressFavorite,
+  isFavorite,
+  translate,
+  ButtonLeftAccessory,
+}) => {
   // Your existing favorite button styles
-  const favoriteButtonStyles = isFavorite ? $unFavoriteButton : $favoriteButton;
+  const favoriteButtonStyles = isFavorite ? $unFavoriteButton : $favoriteButton
 
   return (
     <PressableView
@@ -347,13 +359,15 @@ const FooterComponent = ({
     >
       <Text
         // ... other props
-        text={isFavorite ? translate("demoPodcastListScreen.unfavoriteButton") : translate("demoPodcastListScreen.favoriteButton")}
+        text={
+          isFavorite
+            ? translate("demoPodcastListScreen.unfavoriteButton")
+            : translate("demoPodcastListScreen.favoriteButton")
+        }
       />
     </PressableView>
-  );
-};
-
-
+  )
+}
 
 // #region Styles
 const $screenContentContainer: ViewStyle = {
@@ -420,7 +434,7 @@ const $favoriteButton: ViewStyle = {
   paddingBottom: spacing.xxxs,
   minHeight: 32,
   alignSelf: "flex-start",
-};
+}
 
 const $unFavoriteButton: ViewStyle = {
   borderRadius: 17,
@@ -433,7 +447,7 @@ const $unFavoriteButton: ViewStyle = {
   paddingBottom: spacing.xxxs,
   minHeight: 32,
   alignSelf: "flex-start",
-};
+}
 
 const $emptyState: ViewStyle = {
   marginTop: spacing.xxl,
@@ -444,6 +458,6 @@ const $emptyStateImage: ImageStyle = {
 }
 // #endregion
 
-export default DemoPodcastListScreen;
+export default DemoPodcastListScreen
 
 // @demo remove-file
