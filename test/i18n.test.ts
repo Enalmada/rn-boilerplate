@@ -57,7 +57,7 @@ function execPromise(command: string): Promise<string> {
 
 describe("i18n", () => {
   test("There are no missing keys", async () => {
-    const command = `grep "[T\\|t]x=[{]\\?\\"\\S*\\"[}]\\?\\|translate(\\"\\S*\\"" -ohr './app' | grep -o "\\".*\\""`;
+    const command = `grep "[T\\|t]x=[{]\\?\\"\\S*\\"[}]\\?\\|translate(\\"\\S*\\"" -ohr './src' | grep -o "\\".*\\""`;
     const stdout = await execPromise(command);
     const allTranslationsDefined = iterate(en, "", []);
     const allTranslationsUsed = stdout.replace(/"/g, "").split("\n");
