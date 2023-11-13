@@ -6,6 +6,9 @@ Currently includes on top of it:
 
 - github workflow unit tests
 - path alias [code changes](https://github.com/Enalmada/rn-boilerplate/pull/1)
+- [expo router](https://docs.expo.dev/router/migrate/from-react-navigation/)
+- precommit lint checks (husky, lint-staged)
+- vitest tests
 
 ## Quick Start
 
